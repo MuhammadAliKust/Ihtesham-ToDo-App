@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ihtesham_project/provider/token.dart';
 import 'package:ihtesham_project/provider/user.dart';
 import 'package:ihtesham_project/views/login.dart';
 import 'package:ihtesham_project/views/register.dart';
@@ -7,7 +8,10 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (context) => UserProvider())],
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => TokenProvider()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -39,7 +43,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: RegisterView(),
+      home: LoginView(),
     );
   }
 }

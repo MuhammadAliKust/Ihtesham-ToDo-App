@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ihtesham_project/provider/token.dart';
+import 'package:ihtesham_project/provider/user.dart';
 import 'package:ihtesham_project/services/auth.dart';
+import 'package:ihtesham_project/views/profile.dart';
+import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -15,6 +19,8 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    var tokenProvider = Provider.of<TokenProvider>(context);
+    var userProvider = Provider.of<UserProvider>(context);
     return Scaffold(
       appBar: AppBar(title: Text("Login")),
       body: Column(
@@ -46,24 +52,38 @@ class _LoginViewState extends State<LoginView> {
                             email: emailController.text,
                             password: pwdController.text,
                           )
-                          .then((val) {
-                            isLoading = false;
-                            setState(() {});
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: Text("Message"),
-                                  content: Text("User has been loggedIn"),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {},
-                                      child: Text("Okay"),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
+                          .then((val) async {
+                            tokenProvider.setToken(val.token.toString());
+                            await AuthServices()
+                                .getProfile(val.token.toString())
+                                .then((userModel) {
+                                  isLoading = false;
+                                  setState(() {});
+                                  userProvider.setUser(userModel);
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text("Message"),
+                                        content: Text("User has been loggedIn"),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      GetProfileView(),
+                                                ),
+                                              );
+                                            },
+                                            child: Text("Okay"),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                });
                           });
                     } catch (e) {
                       isLoading = false;

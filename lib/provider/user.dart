@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
+import 'package:ihtesham_project/models/user.dart';
 
 class UserProvider extends ChangeNotifier {
-  String _name = "";
+  UserModel? _userModel;
 
-  void setName(String val) {
-    _name = val;
+  void setUser(UserModel model) {
+    _userModel = model;
     notifyListeners();
   }
 
-  String getName() => _name;
+  UserModel? getUser() => _userModel;
 }
