@@ -3,6 +3,7 @@ import 'package:ihtesham_project/provider/token.dart';
 import 'package:ihtesham_project/provider/user.dart';
 import 'package:ihtesham_project/services/auth.dart';
 import 'package:ihtesham_project/views/profile.dart';
+import 'package:ihtesham_project/views/register.dart';
 import 'package:provider/provider.dart';
 
 class LoginView extends StatefulWidget {
@@ -95,6 +96,16 @@ class _LoginViewState extends State<LoginView> {
                   },
                   child: Text("Login"),
                 ),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => RegisterView()),
+              );
+            },
+            child: Text("Go to Register"),
+          ),
         ],
       ),
     );
