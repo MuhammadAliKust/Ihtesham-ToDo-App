@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ihtesham_project/provider/token.dart';
 import 'package:ihtesham_project/provider/user.dart';
 import 'package:ihtesham_project/services/auth.dart';
+import 'package:ihtesham_project/views/get_all_task.dart';
 import 'package:ihtesham_project/views/profile.dart';
 import 'package:ihtesham_project/views/register.dart';
 import 'package:provider/provider.dart';
@@ -74,7 +75,7 @@ class _LoginViewState extends State<LoginView> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      GetProfileView(),
+                                                      GetAllTaskView(),
                                                 ),
                                               );
                                             },
