@@ -5,13 +5,15 @@ import 'package:http/http.dart' as http;
 import 'package:ihtesham_project/models/task_listing.dart';
 
 class TaskServices {
+  String baseUrl = "https://todo-nu-plum-19.vercel.app";
+
   ///Create Task
   Future<TaskModel> createTask({
     required String token,
     required String description,
   }) async {
     http.Response response = await http.post(
-      Uri.parse("{{TODO_URL}}/todos/add"),
+      Uri.parse("$baseUrl/todos/add"),
       headers: {'Authorization': token, 'Content-Type': 'application/json'},
       body: jsonEncode({"description": description}),
     );
@@ -25,7 +27,7 @@ class TaskServices {
   ///Get All Task
   Future<TaskListingModel> getAllTask(String token) async {
     http.Response response = await http.get(
-      Uri.parse("{{TODO_URL}}/todos/get"),
+      Uri.parse("$baseUrl/todos/get"),
       headers: {'Authorization': token},
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -38,7 +40,7 @@ class TaskServices {
   ///Get Completed Task
   Future<TaskListingModel> getCompletedTask(String token) async {
     http.Response response = await http.get(
-      Uri.parse("{{TODO_URL}}/todos/completed"),
+      Uri.parse("$baseUrl/todos/completed"),
       headers: {'Authorization': token},
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
@@ -51,7 +53,7 @@ class TaskServices {
   ///Get InCompleted Task
   Future<TaskListingModel> getInCompletedTask(String token) async {
     http.Response response = await http.get(
-      Uri.parse("{{TODO_URL}}/todos/incomplete"),
+      Uri.parse("$baseUrl/todos/incomplete"),
       headers: {'Authorization': token},
     );
     if (response.statusCode == 200 || response.statusCode == 201) {
