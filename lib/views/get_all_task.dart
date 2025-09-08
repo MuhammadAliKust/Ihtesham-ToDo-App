@@ -5,6 +5,7 @@ import 'package:ihtesham_project/services/task.dart';
 import 'package:ihtesham_project/views/create_task.dart';
 import 'package:ihtesham_project/views/get_completed_task.dart';
 import 'package:ihtesham_project/views/get_incompleted_task.dart';
+import 'package:ihtesham_project/views/search_task.dart';
 import 'package:ihtesham_project/views/update_task.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
@@ -45,6 +46,15 @@ class _GetAllTaskViewState extends State<GetAllTaskView> {
               );
             },
             icon: Icon(Icons.incomplete_circle),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SearchTaskView()),
+              );
+            },
+            icon: Icon(Icons.search),
           ),
         ],
       ),
